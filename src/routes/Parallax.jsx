@@ -16,9 +16,6 @@ function Parallax() {
   const backgroundLayer5 = new Image();
   backgroundLayer5.src = '../../assets/layer-5.png';
 
-  let x = 0;
-  let y = 2400;
-
   class Layer {
     constructor(ctx, image, speedModifier) {
       this.ctx = ctx;
@@ -37,7 +34,7 @@ function Parallax() {
         this.x = 0;
       }
 
-      this.x = Math.floor(this.x - this.speed);
+      this.x -= this.speed;
     }
 
     draw() {
