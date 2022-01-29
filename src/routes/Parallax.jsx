@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 function Parallax() {
   const canvasRef = useRef(null);
 
-  let [gameSpeed, setGameSpeed] = useState(5);
+  let [gameSpeed, setGameSpeed] = useState(3);
 
   const backgroundLayer1 = new Image();
   backgroundLayer1.src = '../../assets/layer-1.png';
@@ -60,11 +60,11 @@ function Parallax() {
     let gameFrame = 0;
     let animationFrameId;
 
-    const layer1 = new Layer(ctx, backgroundLayer1, 0.1);
-    const layer2 = new Layer(ctx, backgroundLayer2, 0.2);
-    const layer3 = new Layer(ctx, backgroundLayer3, 0.3);
-    const layer4 = new Layer(ctx, backgroundLayer4, 0.4);
-    const layer5 = new Layer(ctx, backgroundLayer5, 0.5);
+    const layer1 = new Layer(ctx, backgroundLayer1, 0.2);
+    const layer2 = new Layer(ctx, backgroundLayer2, 0.4);
+    const layer3 = new Layer(ctx, backgroundLayer3, 0.6);
+    const layer4 = new Layer(ctx, backgroundLayer4, 0.8);
+    const layer5 = new Layer(ctx, backgroundLayer5, 1.0);
 
     const gameObject = [
       layer1, layer2, layer3, layer4, layer5,
@@ -98,7 +98,6 @@ function Parallax() {
           type="range"
           min={0}
           max={20}
-          defaultValue={5}
           onChange={(e) => setGameSpeed(e.target.value)}
         />
       </div>
