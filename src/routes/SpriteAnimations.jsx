@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import useCanvas from '../hooks/useCanvas';
+/* eslint-disable no-use-before-define */
+import { useState, useRef, useEffect } from 'react';
 
 function SpriteAnimations() {
   const [playerState, setPlayerState] = useState('idle');
+  const canvasRef = useRef(null);
 
   const playerImage = new Image();
   playerImage.src = '../../assets/shadow_dog.png';
@@ -35,27 +36,42 @@ function SpriteAnimations() {
     }
     spriteAnimations[state.name] = frames;
   });
+  useEffect(() => {
+    // Canvas Setup
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    canvas.width = 600;
+    canvas.height = 600;
 
-  const draw = (ctx, gameFrame, canvas) => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const position = Math.floor(gameFrame / staggerFrames)
+    let gameFrame = 0;
+    let animationFrameId;
+
+    // Animation
+    const render = () => {
+      gameFrame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const position = Math.floor(gameFrame / staggerFrames)
     % spriteAnimations[playerState].loc.length;
-    const frameX = spriteWidth * position;
-    const frameY = spriteAnimations[playerState].loc[position].y;
-    ctx.drawImage(
-      playerImage,
-      frameX,
-      frameY,
-      spriteWidth,
-      spriteHeight,
-      0,
-      0,
-      canvas.width,
-      canvas.height,
-    );
-  };
-
-  const canvasRef = useCanvas(draw, { width: 600, height: 600 });
+      const frameX = spriteWidth * position;
+      const frameY = spriteAnimations[playerState].loc[position].y;
+      ctx.drawImage(
+        playerImage,
+        frameX,
+        frameY,
+        spriteWidth,
+        spriteHeight,
+        0,
+        0,
+        canvas.width,
+        canvas.height,
+      );
+      animationFrameId = window.requestAnimationFrame(render);
+    };
+    render();
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
+  });
   return (
     <div className="mt-4">
       {animationStates.map((state) => (
