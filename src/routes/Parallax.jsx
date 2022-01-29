@@ -30,6 +30,7 @@ function Parallax() {
     }
 
     update() {
+      this.speed = gameSpeed * this.speedModifier;
       this.x = (gameFrame * this.speed) % this.width;
     }
 
