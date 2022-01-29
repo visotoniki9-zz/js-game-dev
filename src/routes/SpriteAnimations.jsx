@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import { useState, useRef, useEffect } from 'react';
 
 function SpriteAnimations() {
