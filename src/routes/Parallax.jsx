@@ -1,9 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 function Parallax() {
   const canvasRef = useRef(null);
 
-  let gameSpeed = 5;
+  let [gameSpeed, setGameSpeed] = useState(5);
 
   const backgroundLayer1 = new Image();
   backgroundLayer1.src = '../../assets/layer-1.png';
@@ -54,7 +54,7 @@ function Parallax() {
     // Canvas Setup
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    canvas.width = 800;
+    canvas.width = 900;
     canvas.height = 700;
 
     let gameFrame = 0;
@@ -66,20 +66,18 @@ function Parallax() {
     const layer4 = new Layer(ctx, backgroundLayer4, 0.4);
     const layer5 = new Layer(ctx, backgroundLayer5, 0.5);
 
+    const gameObject = [
+      layer1, layer2, layer3, layer4, layer5,
+    ];
+
     // Animation
     const animate = () => {
       gameFrame += 1;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      layer1.update();
-      layer1.draw();
-      layer2.update();
-      layer2.draw();
-      layer3.update();
-      layer3.draw();
-      layer4.update();
-      layer4.draw();
-      layer5.update();
-      layer5.draw();
+      gameObject.forEach((o) => {
+        o.update();
+        o.draw();
+      });
       animationFrameId = window.requestAnimationFrame(animate);
     };
     animate();
@@ -88,10 +86,27 @@ function Parallax() {
     };
   });
   return (
-    <canvas
-      className="border-8 my-4 absolute left-1/2 -translate-x-1/2"
-      ref={canvasRef}
-    />
+    <div>
+      <div className="mt-4">
+        <p>
+          Gamespeed:
+          {' '}
+          {gameSpeed}
+        </p>
+        <input
+          className="w-3/4"
+          type="range"
+          min={0}
+          max={20}
+          defaultValue={5}
+          onChange={(e) => setGameSpeed(e.target.value)}
+        />
+      </div>
+      <canvas
+        className="border-8 my-4 absolute left-1/2 -translate-x-1/2"
+        ref={canvasRef}
+      />
+    </div>
   );
 }
 
