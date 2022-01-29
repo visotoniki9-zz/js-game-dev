@@ -86,7 +86,7 @@ function SpriteAnimations() {
         ))}
       </div>
       <canvas
-        className="border-8 w-10/12 max-w-[600px]"
+        className="border-8 w-[100%] max-w-[600px]"
         ref={canvasRef}
       />
     </div>
