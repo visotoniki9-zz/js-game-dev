@@ -75,6 +75,7 @@ function SpriteAnimations() {
     <div className="mt-4">
       {animationStates.map((state) => (
         <button
+          key={state.name}
           type="button"
           className="bg-[#282828] hover:bg-black text-white py-2 px-6 m-1 "
           onClick={() => setPlayerState(state.name)}
