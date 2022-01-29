@@ -4,6 +4,7 @@ function Parallax() {
   const canvasRef = useRef(null);
 
   let [gameSpeed, setGameSpeed] = useState(3);
+  let gameFrame = 0;
 
   const backgroundLayer1 = new Image();
   backgroundLayer1.src = '../../assets/layer-1.png';
@@ -29,12 +30,7 @@ function Parallax() {
     }
 
     update() {
-      this.speed = gameSpeed * this.speedModifier;
-      if (this.x <= -this.width) {
-        this.x = 0;
-      }
-
-      this.x -= this.speed;
+      this.x = (gameFrame * this.speed) % this.width;
     }
 
     draw() {
@@ -50,7 +46,6 @@ function Parallax() {
     canvas.width = 900;
     canvas.height = 700;
 
-    let gameFrame = 0;
     let animationFrameId;
 
     const layer1 = new Layer(ctx, backgroundLayer1, 0.2);
@@ -65,7 +60,7 @@ function Parallax() {
 
     // Animation
     const animate = () => {
-      gameFrame += 1;
+      gameFrame -= 1;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       gameObject.forEach((o) => {
         o.update();
@@ -91,6 +86,7 @@ function Parallax() {
           type="range"
           min={0}
           max={20}
+          defaultValue={3}
           onChange={(e) => setGameSpeed(e.target.value)}
         />
       </div>
