@@ -24,9 +24,9 @@ function App() {
           </Link>
           <Link
             className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
+            to="/NPCMovements"
           >
-            NpcMovements
+            NPCMovements
 
           </Link>
           <Link
