@@ -21,5 +21,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'no-plusplus': 'off',
     'react/prop-types': 'off',
+    'no-unused-vars': 'off',
   },
 };
