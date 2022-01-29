@@ -22,5 +22,7 @@ module.exports = {
     'no-plusplus': 'off',
     'react/prop-types': 'off',
     'no-unused-vars': 'off',
+    'prefer-const': 'off',
+    'react/no-this-in-sfc': 'off',
   },
 };
