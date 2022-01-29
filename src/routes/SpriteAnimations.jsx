@@ -72,19 +72,21 @@ function SpriteAnimations() {
     };
   });
   return (
-    <div className="mt-4">
-      {animationStates.map((state) => (
-        <button
-          key={state.name}
-          type="button"
-          className="bg-[#282828] hover:bg-black text-white py-2 px-6 m-1 "
-          onClick={() => setPlayerState(state.name)}
-        >
-          {state.name}
-        </button>
-      ))}
+    <div className="flex flex-col items-center">
+      <div className="my-4">
+        {animationStates.map((state) => (
+          <button
+            key={state.name}
+            type="button"
+            className="bg-[#282828] hover:bg-black text-white py-2 px-6 m-1 "
+            onClick={() => setPlayerState(state.name)}
+          >
+            {state.name}
+          </button>
+        ))}
+      </div>
       <canvas
-        className="border-8 my-4 absolute left-1/2 -translate-x-1/2"
+        className="border-8 w-10/12 max-w-[600px]"
         ref={canvasRef}
       />
     </div>
