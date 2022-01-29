@@ -1,83 +1,35 @@
 import { Link, Outlet } from 'react-router-dom';
 
 function App() {
+  const links = [
+    'SpriteAnimations',
+    'Parallax',
+    'NPCMovements',
+    'RectangleCollisions',
+    'CircleCollisions',
+    'EventBasedAnim',
+    'RavenGame',
+    'EnemyTypes',
+    'StateManagment',
+    'FullGame',
+  ];
   return (
-    <div className=" text-white p-5 text-center">
-      <header>
-        <h1 className="text-4xl px-2 mb-4">
+    <div className=" text-white p-5 text-center flex items-center flex-col">
+      <header className="max-w-screen-2xl">
+        <h1 className="text-4xl px-2 mb-6">
           JsGameDev
         </h1>
-        <nav className="grid grid-cols-5 gap-1">
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            SpriteAnimations
+        <nav className="grid grid-cols-2 md:grid-cols-5 gap-1">
 
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/Parallax"
-          >
-            Parallax
+          {links.map((link) => (
+            <Link
+              className="bg-[#282828] p-4 hover:bg-black"
+              to={`/${link}`}
+            >
+              {link}
+            </Link>
+          ))}
 
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/NPCMovements"
-          >
-            NPCMovements
-
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            RectangleCollision
-
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            CircleCollision
-
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            EventBasedAnim
-
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            RavenGame
-
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            EnemyTypes
-
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            StateManagment
-
-          </Link>
-          <Link
-            className="bg-[#282828] p-4 hover:bg-black"
-            to="/SpriteAnimations"
-          >
-            FullSideScrollerGame
-
-          </Link>
         </nav>
       </header>
       <Outlet />
