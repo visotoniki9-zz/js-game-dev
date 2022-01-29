@@ -45,7 +45,7 @@ function Parallax() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     canvas.width = 900;
-    canvas.height = 700;
+    canvas.height = 600;
 
     let animationFrameId;
 
@@ -75,7 +75,7 @@ function Parallax() {
     };
   });
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <div className="mt-4">
         <p>
           Gamespeed:
@@ -83,7 +83,6 @@ function Parallax() {
           {gameSpeed}
         </p>
         <input
-          className="w-3/4"
           type="range"
           min={0}
           max={20}
@@ -92,7 +91,7 @@ function Parallax() {
         />
       </div>
       <canvas
-        className="border-8 my-4 absolute left-1/2 -translate-x-1/2"
+        className="border-8 my-4 w-full max-w-[900px]"
         ref={canvasRef}
       />
     </div>
