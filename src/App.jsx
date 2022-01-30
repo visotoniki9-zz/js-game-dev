@@ -14,7 +14,7 @@ function App() {
     'FullGame',
   ];
   return (
-    <div className=" text-white p-5 text-center flex items-center flex-col">
+    <div className=" text-[#B8B5B1] p-5 text-center flex items-center flex-col">
       <header className="max-w-screen-2xl">
         <h1 className="text-4xl px-2 mb-6">
           JsGameDev
@@ -23,7 +23,7 @@ function App() {
 
           {links.map((link) => (
             <Link
-              className="bg-[#282828] p-4 hover:bg-black"
+              className="bg-[#363839] p-4 hover:bg-[202020]"
               to={`/${link}`}
             >
               {link}

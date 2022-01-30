@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 body {
-  background-color: #404040;
+  background-color: #3e4142;
   font-family: "Poppins", sans-serif;
 }
 
 canvas {
-  background-color: #505050;
+  background-color: #46494b;
+  border-color: #424547;
 }
