@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
+import shadowDogImage from '../../assets/shadow_dog.png';
 
 function SpriteAnimations() {
   const [playerState, setPlayerState] = useState('idle');
   const canvasRef = useRef(null);
 
   const playerImage = new Image();
-  playerImage.src = '../../assets/shadow_dog.png';
+  playerImage.src = shadowDogImage;
   const spriteWidth = 575;
   const spriteHeight = 523;
 

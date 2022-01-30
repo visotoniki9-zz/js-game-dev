@@ -1,4 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
+import layer1Img from '../../assets/layer-1.png';
+import layer2Img from '../../assets/layer-2.png';
+import layer3Img from '../../assets/layer-3.png';
+import layer4Img from '../../assets/layer-4.png';
+import layer5Img from '../../assets/layer-5.png';
 
 function Parallax() {
   const canvasRef = useRef(null);
@@ -7,15 +12,15 @@ function Parallax() {
   let gameFrame = 0;
 
   const backgroundLayer1 = new Image();
-  backgroundLayer1.src = '../../assets/layer-1.png';
+  backgroundLayer1.src = layer1Img;
   const backgroundLayer2 = new Image();
-  backgroundLayer2.src = '../../assets/layer-2.png';
+  backgroundLayer2.src = layer2Img;
   const backgroundLayer3 = new Image();
-  backgroundLayer3.src = '../../assets/layer-3.png';
+  backgroundLayer3.src = layer3Img;
   const backgroundLayer4 = new Image();
-  backgroundLayer4.src = '../../assets/layer-4.png';
+  backgroundLayer4.src = layer4Img;
   const backgroundLayer5 = new Image();
-  backgroundLayer5.src = '../../assets/layer-5.png';
+  backgroundLayer5.src = layer5Img;
 
   class Layer {
     constructor(ctx, image, speedModifier) {
