@@ -8,7 +8,7 @@ import layer5Img from '../../assets/layer-5.webp';
 function Parallax() {
   const canvasRef = useRef(null);
 
-  let [gameSpeed, setGameSpeed] = useState(3);
+  let gameSpeed = useRef(3);
   let gameFrame = 0;
 
   const backgroundLayer1 = new Image();
@@ -31,12 +31,16 @@ function Parallax() {
       this.height = 700;
       this.image = image;
       this.speedModifier = speedModifier;
-      this.speed = gameSpeed * this.speedModifier;
+      this.speed = gameSpeed.current * this.speedModifier;
     }
 
     update() {
-      this.speed = gameSpeed * this.speedModifier;
-      this.x = (gameFrame * this.speed) % this.width;
+      this.speed = gameSpeed.current * this.speedModifier;
+      if (this.x <= -this.width) {
+        this.x = 0;
+      }
+      this.x -= this.speed;
+      // this.x = (gameFrame * this.speed) % this.width;
     }
 
     draw() {
@@ -53,7 +57,6 @@ function Parallax() {
     canvas.height = 600;
 
     let animationFrameId;
-
     const layer1 = new Layer(ctx, backgroundLayer1, 0.2);
     const layer2 = new Layer(ctx, backgroundLayer2, 0.4);
     const layer3 = new Layer(ctx, backgroundLayer3, 0.6);
@@ -82,17 +85,12 @@ function Parallax() {
   return (
     <div className="flex flex-col items-center">
       <div className="mt-4">
-        <p>
-          Gamespeed:
-          {' '}
-          {gameSpeed}
-        </p>
         <input
           type="range"
           min={0}
           max={20}
           defaultValue={3}
-          onChange={(e) => setGameSpeed(e.target.value)}
+          onChange={(e) => gameSpeed.current = e.target.value}
         />
       </div>
       <canvas
