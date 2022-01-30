@@ -1,23 +1,30 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+
+import enemy1Img from '../../assets/enemy1.png';
+import enemy2Img from '../../assets/enemy2.png';
+import enemy3Img from '../../assets/enemy3.png';
+import enemy4Img from '../../assets/enemy4.png';
 
 function NpcMovements() {
   const canvasRef = useRef(null);
 
   let gameFrame = 0;
   let animationFrameId;
-  const enemiesArray = [];
+  const [enemiesNum, SetEnemiesNum] = useState(50);
+  const [enemiesArray, setEnemiesArray] = useState([]);
 
   class Enemy {
-    constructor(ctx, canvas) {
+    constructor(ctx, canvas, enemyType) {
       this.image = new Image();
       this.image.src;
       this.canvas = canvas;
       this.ctx = ctx;
       this.spriteWidth;
       this.spriteHeight;
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.randomEnemy();
+      this.enemyType = enemyType ?? Math.floor(Math.random() * 4);
+      this.loadEnemyType();
+      this.x = Math.random() * (canvas.width - this.spriteWidth / 2);
+      this.y = Math.random() * (canvas.height - this.spriteHeight / 2);
       this.width = this.spriteWidth / 2;
       this.height = this.spriteHeight / 2;
       this.totalFrames = 4;
@@ -25,25 +32,24 @@ function NpcMovements() {
       this.flapSpeed = Math.floor(Math.random() * 3 + 1);
     }
 
-    randomEnemy() {
-      const r = Math.floor(Math.random() * 3);
-      if (r === 0) {
-        this.image.src = '../../assets/enemy1.png';
+    loadEnemyType() {
+      if (this.enemyType === 0) {
+        this.image.src = enemy1Img;
         this.spriteWidth = 293;
         this.spriteHeight = 155;
         this.totalFrames = 4;
-      } else if (r === 1) {
-        this.image.src = '../../assets/enemy2.png';
+      } else if (this.enemyType === 1) {
+        this.image.src = enemy2Img;
         this.spriteWidth = 266;
         this.spriteHeight = 188;
         this.totalFrames = 4;
-      } else if (r === 2) {
-        this.image.src = '../../assets/enemy3.png';
+      } else if (this.enemyType === 2) {
+        this.image.src = enemy3Img;
         this.spriteWidth = 218;
         this.spriteHeight = 177;
         this.totalFrames = 4;
-      } else if (r === 3) {
-        this.image.src = '../../assets/enemy4.png';
+      } else if (this.enemyType === 3) {
+        this.image.src = enemy4Img;
         this.spriteWidth = 213;
         this.spriteHeight = 212;
         this.totalFrames = 7;
@@ -69,8 +75,12 @@ function NpcMovements() {
     canvas.width = 900;
     canvas.height = 1200;
 
-    for (let i = 0; i <= 100; i++) {
-      enemiesArray.push(new Enemy(ctx, canvas));
+    if (enemiesArray.length < enemiesNum) {
+      for (let i = 0; i <= enemiesNum - enemiesArray.length; i++) {
+        setEnemiesArray([...enemiesArray, new Enemy(ctx, canvas)]);
+      }
+    } else if (enemiesArray.length > enemiesNum) {
+      setEnemiesArray(enemiesArray.slice(0, -(enemiesArray.length - enemiesNum)));
     }
     // Animation
     const animate = () => {
@@ -86,6 +96,18 @@ function NpcMovements() {
   });
   return (
     <div className="mt-8">
+      <p>
+        Number of enemies:
+        {' '}
+        {enemiesNum}
+      </p>
+      <input
+        type="range"
+        min={1}
+        max={100}
+        defaultValue={50}
+        onChange={(e) => SetEnemiesNum(e.target.value)}
+      />
       <canvas
         className="border-8 w-full w-max-[900px]"
         ref={canvasRef}
