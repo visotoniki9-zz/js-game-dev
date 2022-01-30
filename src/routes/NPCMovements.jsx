@@ -11,7 +11,7 @@ function NpcMovements() {
   let gameFrame = 0;
   let animationFrameId;
   const [enemiesNum, SetEnemiesNum] = useState(50);
-  const [enemiesArray, setEnemiesArray] = useState([]);
+  const enemiesArrayRef = useRef([]);
 
   class Enemy {
     constructor(ctx, canvas, enemyType) {
@@ -75,17 +75,16 @@ function NpcMovements() {
     canvas.width = 900;
     canvas.height = 1200;
 
-    if (enemiesArray.length < enemiesNum) {
-      for (let i = 0; i <= enemiesNum - enemiesArray.length; i++) {
-        setEnemiesArray([...enemiesArray, new Enemy(ctx, canvas)]);
-      }
-    } else if (enemiesArray.length > enemiesNum) {
-      setEnemiesArray(enemiesArray.slice(0, enemiesArray.length - enemiesNum));
+    while (enemiesArrayRef.current.length < enemiesNum) {
+      enemiesArrayRef.current.push(new Enemy(ctx, canvas));
+    }
+    while (enemiesArrayRef.current.length > enemiesNum) {
+      enemiesArrayRef.current.pop();
     }
     // Animation
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      enemiesArray.forEach((enemy) => {
+      enemiesArrayRef.current.forEach((enemy) => {
         enemy.update();
         enemy.draw();
       });
