@@ -80,7 +80,7 @@ function NpcMovements() {
         setEnemiesArray([...enemiesArray, new Enemy(ctx, canvas)]);
       }
     } else if (enemiesArray.length > enemiesNum) {
-      setEnemiesArray(enemiesArray.slice(0, -(enemiesArray.length - enemiesNum)));
+      setEnemiesArray(enemiesArray.slice(0, enemiesArray.length - enemiesNum));
     }
     // Animation
     const animate = () => {
