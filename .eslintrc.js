@@ -26,5 +26,6 @@ module.exports = {
     'react/no-this-in-sfc': 'off',
     'max-len': 'off',
     'no-unused-expressions': 'off',
+    'no-return-assign': 'off',
   },
 };
