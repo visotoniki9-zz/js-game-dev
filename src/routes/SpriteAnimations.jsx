@@ -71,7 +71,7 @@ function SpriteAnimations() {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  });
+  }, []);
   return (
     <div className="flex flex-col items-center">
       <div className="my-4">
