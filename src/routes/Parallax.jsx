@@ -5,22 +5,21 @@ import layer3Img from '../../assets/layer-3.webp';
 import layer4Img from '../../assets/layer-4.webp';
 import layer5Img from '../../assets/layer-5.webp';
 
+const backgroundLayer1 = new Image();
+backgroundLayer1.src = layer1Img;
+const backgroundLayer2 = new Image();
+backgroundLayer2.src = layer2Img;
+const backgroundLayer3 = new Image();
+backgroundLayer3.src = layer3Img;
+const backgroundLayer4 = new Image();
+backgroundLayer4.src = layer4Img;
+const backgroundLayer5 = new Image();
+backgroundLayer5.src = layer5Img;
+
 function Parallax() {
   const canvasRef = useRef(null);
-
   let gameSpeed = useRef(3);
   let gameFrame = 0;
-
-  const backgroundLayer1 = new Image();
-  backgroundLayer1.src = layer1Img;
-  const backgroundLayer2 = new Image();
-  backgroundLayer2.src = layer2Img;
-  const backgroundLayer3 = new Image();
-  backgroundLayer3.src = layer3Img;
-  const backgroundLayer4 = new Image();
-  backgroundLayer4.src = layer4Img;
-  const backgroundLayer5 = new Image();
-  backgroundLayer5.src = layer5Img;
 
   class Layer {
     constructor(ctx, image, speedModifier) {
@@ -28,7 +27,7 @@ function Parallax() {
       this.x = 0;
       this.y = 0;
       this.width = 2400;
-      this.height = 700;
+      this.height = 720;
       this.image = image;
       this.speedModifier = speedModifier;
       this.speed = gameSpeed.current * this.speedModifier;
@@ -40,7 +39,6 @@ function Parallax() {
         this.x = 0;
       }
       this.x -= this.speed;
-      // this.x = (gameFrame * this.speed) % this.width;
     }
 
     draw() {
@@ -53,8 +51,8 @@ function Parallax() {
     // Canvas Setup
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    canvas.width = 900;
-    canvas.height = 600;
+    canvas.width = 1280;
+    canvas.height = 720;
 
     let animationFrameId;
     const layer1 = new Layer(ctx, backgroundLayer1, 0.2);
