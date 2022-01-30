@@ -24,5 +24,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'prefer-const': 'off',
     'react/no-this-in-sfc': 'off',
+    'max-len': 'off',
+    'no-unused-expressions': 'off',
   },
 };
