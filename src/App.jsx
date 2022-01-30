@@ -23,7 +23,7 @@ function App() {
 
           {links.map((link) => (
             <Link
-              className="bg-[#363839] p-4 hover:bg-[202020]"
+              className="bg-[#363839] p-4 hover:bg-[#202020]"
               to={`/${link}`}
             >
               {link}
