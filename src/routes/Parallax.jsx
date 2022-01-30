@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import layer1Img from '../../assets/layer-1.png';
-import layer2Img from '../../assets/layer-2.png';
-import layer3Img from '../../assets/layer-3.png';
-import layer4Img from '../../assets/layer-4.png';
-import layer5Img from '../../assets/layer-5.png';
+import layer1Img from '../../assets/layer-1.webp';
+import layer2Img from '../../assets/layer-2.webp';
+import layer3Img from '../../assets/layer-3.webp';
+import layer4Img from '../../assets/layer-4.webp';
+import layer5Img from '../../assets/layer-5.webp';
 
 function Parallax() {
   const canvasRef = useRef(null);

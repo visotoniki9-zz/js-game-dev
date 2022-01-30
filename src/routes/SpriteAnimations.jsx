@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import shadowDogImage from '../../assets/shadow_dog.png';
+import shadowDogImage from '../../assets/shadow_dog.webp';
 
 function SpriteAnimations() {
   const [playerState, setPlayerState] = useState('idle');
