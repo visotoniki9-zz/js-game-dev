@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { render } from 'react-dom';
 
 import enemy1Img from '../../assets/enemy1.png';
 import enemy2Img from '../../assets/enemy2.png';
@@ -21,15 +22,17 @@ function NpcMovements() {
       this.ctx = ctx;
       this.spriteWidth;
       this.spriteHeight;
+      this.speed = Math.floor(Math.random() * 3 + 1);
       this.enemyType = enemyType ?? Math.floor(Math.random() * 4);
       this.loadEnemyType();
-      this.x = Math.random() * (canvas.width - this.spriteWidth / 2);
-      this.y = Math.random() * (canvas.height - this.spriteHeight / 2);
+      this.x = Math.random() * (canvas.width + 500);
+      this.y = Math.random() * (canvas.height);
       this.width = this.spriteWidth / 2;
       this.height = this.spriteHeight / 2;
       this.totalFrames = 4;
       this.frame = Math.floor(Math.random() * 4);
       this.flapSpeed = Math.floor(Math.random() * 3 + 1);
+      this.delta = Math.floor(Math.random() * 10);
     }
 
     loadEnemyType() {
@@ -57,8 +60,14 @@ function NpcMovements() {
     }
 
     update() {
-      this.x += Math.random() * 4 - 2;
-      this.y += Math.random() * 4 - 2;
+      if (this.enemyType === 0) {
+        this.x += Math.random() * 4 - 2;
+        this.y += Math.random() * 4 - 2;
+      } else if (this.enemyType === 1) {
+        if (this.x < -this.spriteWidth) { this.x = 1000; }
+        this.x -= this.speed;
+        this.y += Math.sin((gameFrame / 30) + this.delta);
+      }
       if (gameFrame % this.flapSpeed === 0) {
         this.frame > this.totalFrames ? this.frame = 0 : this.frame++;
       }
@@ -76,7 +85,7 @@ function NpcMovements() {
     canvas.height = 1200;
 
     while (enemiesArrayRef.current.length < enemiesNum) {
-      enemiesArrayRef.current.push(new Enemy(ctx, canvas));
+      enemiesArrayRef.current.push(new Enemy(ctx, canvas, 2));
     }
     while (enemiesArrayRef.current.length > enemiesNum) {
       enemiesArrayRef.current.pop();
