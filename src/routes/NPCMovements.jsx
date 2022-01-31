@@ -25,8 +25,8 @@ function NpcMovements() {
       this.speed = Math.floor(Math.random() * 3 + 1);
       this.enemyType = enemyType ?? Math.floor(Math.random() * 4);
       this.loadEnemyType();
-      this.x = Math.random() * (canvas.width + 500);
-      this.y = Math.random() * (canvas.height);
+      this.x = Math.random() * (canvas.width - this.spriteWidth / 2);
+      this.y = Math.random() * (canvas.height - this.spriteHeight / 2);
       this.width = this.spriteWidth / 2;
       this.height = this.spriteHeight / 2;
       this.totalFrames = 4;
@@ -46,6 +46,7 @@ function NpcMovements() {
         this.spriteWidth = 266;
         this.spriteHeight = 188;
         this.totalFrames = 4;
+        this.x = Math.random() * (this.canvas.width + 400);
       } else if (this.enemyType === 2) {
         this.image.src = enemy3Img;
         this.spriteWidth = 218;
@@ -67,6 +68,9 @@ function NpcMovements() {
         if (this.x < -this.spriteWidth) { this.x = 1000; }
         this.x -= this.speed;
         this.y += Math.sin((gameFrame / 30) + this.delta);
+      } else if (this.enemyType === 2) {
+        this.x += 2 * Math.sin((gameFrame / 40) + this.delta);
+        this.y += Math.cos((gameFrame / 40) + this.delta);
       }
       if (gameFrame % this.flapSpeed === 0) {
         this.frame > this.totalFrames ? this.frame = 0 : this.frame++;
